@@ -19,9 +19,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'password',
+        'isCoordinador',
     ];
+
+    public function usuarienviaments()
+    {
+        return $this->belongsToMany(Ofertes::class, 'enviaments', 'IdUsuari', 'IdOferta')->withTimestamps();
+    }
 
     /**
      * The attributes that should be hidden for serialization.
