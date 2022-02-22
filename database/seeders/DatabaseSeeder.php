@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Empreses;
+use App\Models\Estudis;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,33 +22,52 @@ class DatabaseSeeder extends Seeder
             'name' => 'test',
             'surname' => 'test testing',
             'email' => 'test@test.com',
+            'dni' => '23455g',
+            'telefon' => 73738393,
             'password' => Hash::make('testtesttest'),
-            'isCoordinador' => false
+
         ]);
+
         $u2 = User::create([
-            'name' => 'raul',
-            'surname' => 'ramirez',
-            'email' => 'raul@test.com',
-            'password' => Hash::make('raulraulraul'),
-            'isCoordinador' => true
+            'name' => 'test2',
+            'surname' => 'test testing',
+            'email' => 'test2@test.com',
+            'dni' => '23455g',
+            'telefon' => 73738393,
+            'password' => Hash::make('testtesttest'),
         ]);
-        $u3 = User::create([
-            'name' => 'amina',
-            'surname' => 'khyat',
-            'email' => 'amina@test.com',
-            'password' =>  Hash::make('aminaaminaamina'),
-            'isCoordinador' => true
-        ]);
-        $u4 = User::create([
-            'name' => 'adrian',
-            'surname' => 'naise',
-            'email' => 'adrian@test.com',
-            'password' => Hash::make('adrianadrian'),
-            'isCoordinador' => false
-        ]);
+
 
         Estudis::create([
             'nom' => 'Programació'
+        ]);
+        Estudis::create([
+            'nom' => 'ASIX'
+        ]);
+        Estudis::create([
+            'nom' => 'DAW'
+        ]);
+        Estudis::create([
+            'nom' => 'CACA'
+        ]);
+        Estudis::create([
+            'nom' => 'DEVACA'
+        ]);
+        Estudis::create([
+            'nom' => 'HOLA'
+        ]);
+
+        Empreses::create([
+            'nom' => 'empresa1',
+            'email' => 'empresa1@test.com'
+        ]);
+        Empreses::create([
+            'nom' => 'empresa2',
+            'email' => 'empresa2@test.com'
+        ]);
+        Empreses::create([
+            'nom' => 'empresa3',
+            'email' => 'empresa3@test.com'
         ]);
     }
 }
