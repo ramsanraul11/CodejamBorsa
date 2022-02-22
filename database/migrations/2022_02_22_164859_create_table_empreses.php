@@ -20,10 +20,7 @@ class CreateTableEmpreses extends Migration
             $table->timestamps();
         });
 
-        Schema::table('empreses', function (Blueprint $table) {
-            $table->unsignedBigInteger('IdOferta');
-            $table->foreign('IdOferta')->references('IdOferta')->on('ofertes')->onDelete('cascade');
-        });
+
     }
 
     /**
