@@ -13,14 +13,14 @@ class Ofertes extends Model
     protected $fillable = ['descripcio', 'pendentEnviament'];
 
     public function empreses(){
-        return $this->belongsTo('App\Models\Empreses');
+        return $this->belongsTo(Empreses::class);
     }
 
     public function titulacions(){
         return $this->belongsToMany(Titulacions::class, 'ofertestitulacions', 'IdTitulacio', 'IdOferta')->withTimestamps();
     }
 
-    public function ofertaenviaments()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'enviaments', 'IdUsuari', 'IdOferta')->withTimestamps();
     }

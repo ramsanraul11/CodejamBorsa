@@ -11,4 +11,8 @@ class Estudis extends Model
     protected $table = 'estudis';
     protected $primaryKey = 'IdEstudi';
     protected $fillable = ['nom'];
+
+    public function estudisuser(){
+        return $this->belongsTo(EstudisUser::class);
+    }
 }

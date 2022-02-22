@@ -21,13 +21,22 @@ class User extends Authenticatable
         'name',
         'surname',
         'email',
+        'dni',
+        'telefon',
         'password',
+        'pathFile',
+        'nameFile',
         'isCoordinador',
+        'isTreballant'
     ];
 
-    public function usuarienviaments()
+    public function ofertes()
     {
         return $this->belongsToMany(Ofertes::class, 'enviaments', 'IdUsuari', 'IdOferta')->withTimestamps();
+    }
+
+    public function estudisuser(){
+        return $this->belongsTo(EstudisUser::class);
     }
 
     /**

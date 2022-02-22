@@ -13,7 +13,7 @@ class Empreses extends Model
     protected $fillable = ['nom','email'];
 
     public function ofertes(){
-        return $this->hasMany('App\Models\Ofertes');
+        return $this->hasMany(Ofertes::class);
     }
 
 }
