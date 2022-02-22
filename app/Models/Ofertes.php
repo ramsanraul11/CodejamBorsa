@@ -16,12 +16,13 @@ class Ofertes extends Model
         return $this->belongsTo(Empreses::class);
     }
 
-    public function titulacions(){
-        return $this->belongsToMany(Titulacions::class, 'ofertestitulacions', 'IdTitulacio', 'IdOferta')->withTimestamps();
-    }
-
     public function users()
     {
         return $this->belongsToMany(User::class, 'enviaments', 'IdUsuari', 'IdOferta')->withTimestamps();
+    }
+
+    public function estudis()
+    {
+        return $this->belongsToMany(Estudis::class, 'ofertesestudis', 'IdOferta', 'IdEstudi')->withTimestamps();
     }
 }

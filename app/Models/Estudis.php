@@ -15,4 +15,9 @@ class Estudis extends Model
     public function estudisuser(){
         return $this->belongsTo(EstudisUser::class);
     }
+
+    public function ofertes()
+    {
+        return $this->belongsToMany(Ofertes::class, 'ofertesestudis', 'IdOferta', 'IdEstudi')->withTimestamps();
+    }
 }
