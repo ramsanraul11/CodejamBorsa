@@ -8,6 +8,6 @@ class OfertesEstudis extends Model
 {
     use HasFactory;
     protected $table = "ofertesestudis";
-    protected $primaryKey = ["IdOfertaEstudi"];
-    protected $fillable = ["IdEstudi", "IdOferta"];
+    protected $primaryKey = ["IdOferta","IdEstudi"];
+    protected $fillable = ["IdOferta", "IdEstudi"];
 }
