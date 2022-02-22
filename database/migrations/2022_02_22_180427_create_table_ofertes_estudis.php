@@ -14,11 +14,11 @@ class CreateTableOfertesEstudis extends Migration
     public function up()
     {
         Schema::create('ofertesestudis', function (Blueprint $table) {
-            $table->bigInteger("IdUsuari")->unsigned();
-            $table->foreign("IdUsuari")->references("id")->on("users")->onDelete("cascade");
             $table->bigInteger("IdOferta")->unsigned();
             $table->foreign("IdOferta")->references("IdOferta")->on("ofertes")->onDelete("cascade");
-            $table->primary(["IdUsuari","IdOferta"]);
+            $table->bigInteger("IdEstudi")->unsigned();
+            $table->foreign("IdEstudi")->references("IdEstudi")->on("estudis")->onDelete("cascade");
+            $table->primary(["IdOferta","IdEstudi"]);
             $table->timestamps();
         });
     }
