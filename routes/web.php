@@ -36,15 +36,12 @@ Route::get('/paramOpcional/{id?}/{user?}',function($id=null,$user=null){
 });*/
 
 Route::group(['prefix' => 'empresa'], function () {
-    Route::get('/', function (){
-        return 'Pagina de /empresa/';
-    });
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'empresesShow'])->name('empresesShow');
+
     Route::get('/add', function (){
         return 'Pagina de add';
     });
-    Route::get('/edit/{id}', function ($id){
-        return 'Pagina de edit ' . $id;
-    });
+    Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editEmpresa'])->name('editEmpresa');
     Route::group(['prefix' => 'oferta'], function () {
         Route::get('/', function (){
             return 'PAgina empresa/oferta';
@@ -60,7 +57,6 @@ Route::group(['prefix' => 'empresa'], function () {
         });
     });
 });
-
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
