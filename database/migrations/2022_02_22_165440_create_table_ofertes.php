@@ -17,7 +17,7 @@ class CreateTableOfertes extends Migration
             $table->bigIncrements('IdOferta');
             $table->string('descripcio', 255);
             $table->boolean('pendentEnviament');
-            $table->unsignedBigInteger('IdEmpresa');
+            $table->unsignedBigInteger('IdEmpresa')->index()->nullable();
             $table->timestamps();
         });
 
