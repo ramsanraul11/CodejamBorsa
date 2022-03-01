@@ -79,5 +79,10 @@
             @yield('content')
         </main>
     </div>
+<script>
+    const editEmpresa = (id) => {
+        window.location.href = `/empresa/edit/${id}`;
+    }
+</script>
 </body>
 </html>
