@@ -13,7 +13,7 @@ class Ofertes extends Model
     protected $fillable = ['descripcio', 'pendentEnviament'];
 
     public function empreses(){
-        return $this->belongsTo(Empreses::class);
+        return $this->belongsTo(Empreses::class, 'IdEmpresa');
     }
 
     public function users()

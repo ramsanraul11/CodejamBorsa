@@ -16,8 +16,8 @@ class CreateTableEstudisUser extends Migration
         Schema::create('estudisuser', function (Blueprint $table) {
             $table->bigIncrements('IdEstudiUser');
             $table->integer('AnyPromocio');
-            $table->unsignedBigInteger('IdUsuari');
-            $table->unsignedBigInteger('IdEstudi');
+            $table->unsignedBigInteger('IdUsuari')->nullable();
+            $table->unsignedBigInteger('IdEstudi')->nullable();
             $table->timestamps();
         });
 

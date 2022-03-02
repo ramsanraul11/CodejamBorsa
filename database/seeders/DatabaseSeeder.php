@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Empreses;
 use App\Models\Estudis;
+use App\Models\EstudisUser;
+use App\Models\Ofertes;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -38,36 +40,68 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Estudis::create([
+        $s1= Estudis::create([
             'nom' => 'Programació'
         ]);
-        Estudis::create([
+        $s2 = Estudis::create([
             'nom' => 'ASIX'
         ]);
-        Estudis::create([
+        $s3 =Estudis::create([
             'nom' => 'DAW'
         ]);
-        Estudis::create([
+        $s4 = Estudis::create([
             'nom' => 'CACA'
         ]);
-        Estudis::create([
+        $s5 = Estudis::create([
             'nom' => 'DEVACA'
         ]);
-        Estudis::create([
+        $s6 = Estudis::create([
             'nom' => 'HOLA'
         ]);
 
-        Empreses::create([
+        $e1 = Empreses::create([
             'nom' => 'empresa1',
             'email' => 'empresa1@test.com'
         ]);
-        Empreses::create([
+
+        $e2 =Empreses::create([
             'nom' => 'empresa2',
             'email' => 'empresa2@test.com'
         ]);
-        Empreses::create([
+        $e3 = Empreses::create([
             'nom' => 'empresa3',
             'email' => 'empresa3@test.com'
         ]);
+
+        $o1 = Ofertes::create([
+            'descripcio' => 'Oferta per C#',
+            'pendentEnviament' => true
+            //'IdEmpresa' => $e1->IdEmpresa
+        ]);
+
+        $o2 = Ofertes::create([
+            'descripcio' => 'Oferta per Java',
+            'pendentEnviament' => true
+        ]);
+
+        $o3 = Ofertes::create([
+            'descripcio' => 'Oferta per Javascript',
+            'pendentEnviament' => true
+        ]);
+
+        $o1->empreses()->associate($e1)->save();
+        $o2->empreses()->associate($e2)->save();
+        $o3->empreses()->associate($e3)->save();
+
+        $o1->estudis()->attach($s1);
+        $o2->estudis()->attach($s3);
+        $o3->estudis()->attach($s2);
+
+       /* $eu1 = EstudisUser::create([
+            'AnyPromocio' => 2001
+        ]);
+
+        $eu1->users()->attach($u2);
+        $eu1->estudis()->attach($e1);*/
     }
 }
