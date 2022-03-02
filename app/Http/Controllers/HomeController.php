@@ -60,7 +60,7 @@ class HomeController extends Controller
     }
 
     public function empresesShow(){
-        $empreses =  Empreses::all();
+        $empreses =  Empreses::paginate(5);
 
         return View::make('empresa.empresa', compact('empreses'));
     }

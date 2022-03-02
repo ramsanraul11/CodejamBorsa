@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row row-cols-2 justify-content-evenly">
-                        <div class="col-9">{{ __('Empreses') }}</div>
+                        <div class="col-9 align-self-center">{{ __('Empreses') }}</div>
                         <div class="col-3"><button class="btn btn-outline-dark" type="button" onclick="addEmpresa()">Afegir empresa <i class="fa-solid fa-plus"></i></button></div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover mb-5">
                             <thead>
                             <tr>
                                 <th>Nom</th>
@@ -41,6 +41,10 @@
                             @endforeach
                             </tbody>
                         </table>
+                        {{-- Pagination --}}
+                        <div class="d-flex justify-content-center">
+                            {{ $empreses->links('pagination::bootstrap-4')}}
+                        </div>
                 </div>
             </div>
         </div>

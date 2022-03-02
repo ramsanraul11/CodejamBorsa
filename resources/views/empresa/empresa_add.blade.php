@@ -18,12 +18,14 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="InputEditNameEmpresa">Nom</label>
-                                    <input type="text" name="NameEmpresa" class="form-control" id="InputEditNameEmpresa" placeholder="Nom" >
+                                    <input type="text" name="NameEmpresa" class="form-control" id="InputEditNameEmpresa" placeholder="Nom" required>
                                 </div>
-                                <label for="InputEditMailEmpresa">Email address</label>
-                                <input type="email" name="MailEmpresa" class="form-control" id="InputEditMailEmpresa" aria-describedby="emailHelp" placeholder="Email" >
+                                <div class="form-group mt-4">
+                                    <label for="InputEditMailEmpresa">Email address</label>
+                                    <input type="email" name="MailEmpresa" class="form-control" id="InputEditMailEmpresa" aria-describedby="emailHelp" placeholder="Email" required>
+                                </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary mt-4">Submit</button>
                         </form>
                 </div>
             </div>
