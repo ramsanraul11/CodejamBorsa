@@ -5,7 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <div class="card-header">
+                    <div class="row row-cols-2 justify-content-evenly">
+                        <div class="col-9">{{ __('Empreses') }}</div>
+                        <div class="col-3"><button class="btn btn-outline-dark" type="button" onclick="addEmpresa()">Afegir empresa <i class="fa-solid fa-plus"></i></button></div>
+                    </div>
+                </div>
+
+{{--
                 <div class="card-header">{{ __('Empreses') }}</div>
+--}}
 
                 <div class="card-body">
                     @if (session('status'))

@@ -58,6 +58,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('empresesShow') }}">
+                                        {{ __('Empresas') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -82,6 +85,10 @@
 <script>
     const editEmpresa = (id) => {
         window.location.href = `/empresa/edit/${id}`;
+    }
+
+    const addEmpresa = () => {
+        window.location.href = `/empresa/add/`;
     }
 </script>
 </body>

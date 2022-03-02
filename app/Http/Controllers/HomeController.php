@@ -39,7 +39,24 @@ class HomeController extends Controller
         ];
         $emp=Empreses::findOrFail($id);
         $emp->update($data);
-        return view('home');
+        return redirect()->route('empresesShow');
+    }
+
+    public function loadAddEmpresaView(){
+        return view('empresa.empresa_add');
+    }
+
+    public function addEmpresa(Request $request){
+        $nom = $request->NameEmpresa;
+        $mail = $request->MailEmpresa;
+        $data = [
+            'nom' => $nom,
+            'email' => $mail,
+        ];
+
+        Empreses::create($data);
+
+        return redirect()->route('empresesShow');
     }
 
     public function empresesShow(){
@@ -48,7 +65,7 @@ class HomeController extends Controller
         return View::make('empresa.empresa', compact('empreses'));
     }
 
-    public function editEmpresa($id){
+    public function editEmpresa($id = null){
         $empresa =  Empreses::findOrFail($id);
 
         return View::make('empresa.empresa_edit', compact('empresa'));

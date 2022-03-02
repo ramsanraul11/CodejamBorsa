@@ -38,9 +38,10 @@ Route::get('/paramOpcional/{id?}/{user?}',function($id=null,$user=null){
 Route::group(['prefix' => 'empresa'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'empresesShow'])->name('empresesShow');
 
-    Route::get('/add', function (){
-        return 'Pagina de add';
-    });
+    Route::get('/add',[App\Http\Controllers\HomeController::class, 'loadAddEmpresaView'])->name('loadAddEmpresaView');
+    Route::post('/add',[App\Http\Controllers\HomeController::class, 'addEmpresa'])->name('addEmpresa');
+
+
     Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editEmpresa'])->name('editEmpresa');
     Route::post('/editEmpresa', [App\Http\Controllers\HomeController::class, 'submitEmpresaEdit'])->name('submitEmpresaEdit');
 
