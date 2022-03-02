@@ -42,6 +42,8 @@ Route::group(['prefix' => 'empresa'], function () {
         return 'Pagina de add';
     });
     Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editEmpresa'])->name('editEmpresa');
+    Route::post('/editEmpresa', [App\Http\Controllers\HomeController::class, 'submitEmpresaEdit'])->name('submitEmpresaEdit');
+
     Route::group(['prefix' => 'oferta'], function () {
         Route::get('/', function (){
             return 'PAgina empresa/oferta';

@@ -29,6 +29,19 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function submitEmpresaEdit(Request $request){
+        $nom = $request->NameEmpresa;
+        $mail = $request->MailEmpresa;
+        $id = $request->IdEmpresa;
+        $data = [
+         'nom' => $nom,
+         'email' => $mail,
+        ];
+        $emp=Empreses::findOrFail($id);
+        $emp->update($data);
+        return view('home');
+    }
+
     public function empresesShow(){
         $empreses =  Empreses::all();
 
