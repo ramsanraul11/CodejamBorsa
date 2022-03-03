@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empreses;
+use App\Models\Estudis;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
@@ -69,5 +73,36 @@ class HomeController extends Controller
         $empresa =  Empreses::findOrFail($id);
 
         return View::make('empresa.empresa_edit', compact('empresa'));
+    }
+    //para cada profile coge el usuario que esta logged in y le deja editar sus campos de la base de datos
+    public function editUserProfile()
+    {
+        $user = auth()->user();
+        $titulos = Estudis::All();
+        return View::make('titulado.titulado_editperfil', compact('user','titulos'));
+    }
+    //cuando intentamos guardar el user llamamos a esta funcion con un post que esta en las rutas
+    public function updateUserProfile(Request $request){
+        $nom = $request -> NameTitulado;
+        $cognom = $request -> SurnameTitulado;
+        $email = $request -> EmailTitulado;
+        $dni = $request -> DNITitulado;
+        $telefono = $request -> TelefonTitulado;
+        if ($request -> isTreballant == null){
+            $treballant = false;
+        } else {
+            $treballant = true;
+        }
+        $data = [
+            'nom' => $nom,
+            'surname' => $cognom,
+            'email' => $email,
+            'dni' => $dni,
+            'telefon' => $telefono,
+            'isTreballant' => $treballant,
+        ];
+        $user = User::find($request -> IdTitulado);
+        $user->update($data);
+        return redirect()->route('home');
     }
 }

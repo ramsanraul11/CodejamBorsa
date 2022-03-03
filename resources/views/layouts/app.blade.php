@@ -61,6 +61,9 @@
                                     <a class="dropdown-item" href="{{ route('empresesShow') }}">
                                         {{ __('Empresas') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('editUserProfile') }}">
+                                        {{ __('Profile') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

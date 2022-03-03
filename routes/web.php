@@ -61,12 +61,12 @@ Route::group(['prefix' => 'empresa'], function () {
     });
 });
 
+Route::get('/fitxa', [App\Http\Controllers\HomeController::class, 'editUserProfile'])->name('editUserProfile');
+Route::post('/actualizarFitxa', [App\Http\Controllers\HomeController::class, 'updateUserProfile'])->name('updateUserProfile');
+
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/fitxa', function (){
-    return 'return /fitxa';
-});
 
 Route::get('/estudis/add', function (){
     return 'return estudis add';
