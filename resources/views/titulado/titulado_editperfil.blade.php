@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form  method="POST" action="/actualizarFitxa">
+                        <form  method="POST" action="/fitxa">
                             @csrf
                             <input type="number" name="IdTitulado" style="display: none" value="{{$user->id}}"/>
                             <div class="form-group">
