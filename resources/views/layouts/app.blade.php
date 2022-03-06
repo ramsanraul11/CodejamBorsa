@@ -61,6 +61,9 @@
                                     <a class="dropdown-item" href="{{ route('empresesShow') }}">
                                         {{ __('Empresas') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('estudisShow') }}">
+                                        {{ __('Estudis') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('editUserProfile') }}">
                                         {{ __('Profile') }}
                                     </a>
@@ -92,6 +95,14 @@
 
     const addEmpresa = () => {
         window.location.href = `/empresa/add/`;
+    }
+
+    const editEstudi = (id) => {
+        window.location.href = `/estudi/edit/${id}`;
+    }
+
+    const addEstudi = () => {
+        window.location.href = `/estudi/add/`;
     }
 </script>
 </body>
