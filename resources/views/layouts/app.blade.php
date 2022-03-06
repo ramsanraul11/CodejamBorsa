@@ -58,12 +58,16 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->isCoordinador == true)
                                     <a class="dropdown-item" href="{{ route('empresesShow') }}">
                                         {{ __('Empresas') }}
                                     </a>
+                                    @endif
+                                    @if(Auth::user()->isCoordinador == false)
                                     <a class="dropdown-item" href="{{ route('editUserProfile') }}">
                                         {{ __('Profile') }}
                                     </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

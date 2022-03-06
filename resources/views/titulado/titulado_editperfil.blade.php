@@ -37,6 +37,24 @@
                                     <label for="InputEditTelefonTitulado">Telefon</label>
                                     <input type="text" name="TelefonTitulado" class="form-control" id="InputEditTelefonTitulado" placeholder="Telefon" value="{{$user->telefon}}">
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="InputEstudiosTitulado">Titulo</label>
+                                        <select required="required" class="form-control custom-select" id="InputEstudiosTitulado" name="titulos">
+                                            @foreach ($titulos as $titulo)
+                                                <option name="EstudisTitulado" value="{{ $titulo->IdEstudi }}">{{ $titulo->nom }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="InputAnyPromocio">Any Promocio</label>
+                                        <select required="required" class="form-control custom-select" id="InputAnyPromocio" name="AnyPromocio">
+                                            @foreach ($anys as $any)
+                                                <option name="AnyPromocio" value="{{ $any }}">{{ $any }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label for="isTreballant" class="col-md-2 col-form-label">{{ __('Treballant') }}</label>
                                     <input type="checkbox" id="isTreballant" name="isTreballant[]" class="switch-input" value="{{$user->isTreballant}}" @if($user->isTreballant) checked @endif />

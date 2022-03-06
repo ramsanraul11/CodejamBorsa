@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empreses;
 use App\Models\Estudis;
+use App\Models\EstudisUser;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -79,7 +80,10 @@ class HomeController extends Controller
     {
         $user = auth()->user();
         $titulos = Estudis::All();
-        return View::make('titulado.titulado_editperfil', compact('user','titulos'));
+        $anys = ['2000','2001','2002','2003','2004','2005','2006','2007','2008',
+            '2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019',
+            '2020','2021','2022'];
+        return View::make('titulado.titulado_editperfil', compact('user','titulos','anys'));
     }
     //cuando intentamos guardar el user llamamos a esta funcion con un post que esta en las rutas
     public function updateUserProfile(Request $request){
@@ -103,6 +107,19 @@ class HomeController extends Controller
         ];
         $user = User::find($request -> IdTitulado);
         $user->update($data);
+        //$idestudi = $request -> titulos;
+        $user = User::find($request -> IdTitulado);
+        $estudi = Estudis::find($request -> titulos);
+
+        $eu = new EstudisUser();
+
+        $eu -> users() -> associate($user)->save();
+        $eu -> estudis() -> associate($estudi)->save();
+        $anypromocio = $request -> AnyPromocio;
+        $anypromocio = (int)$anypromocio;
+        $eu -> AnyPromocio = $anypromocio;
+        $eu -> save();
+
         return redirect()->route('home');
     }
 }
