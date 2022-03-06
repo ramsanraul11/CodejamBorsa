@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
+
         $u2 = User::create([
             'name' => 'test2',
             'surname' => 'test testing',
@@ -43,6 +44,8 @@ class DatabaseSeeder extends Seeder
         $s1= Estudis::create([
             'nom' => 'Programació'
         ]);
+        $s1->save();
+
         $s2 = Estudis::create([
             'nom' => 'ASIX'
         ]);
@@ -97,11 +100,17 @@ class DatabaseSeeder extends Seeder
         $o2->estudis()->attach($s3);
         $o3->estudis()->attach($s2);
 
-       /* $eu1 = EstudisUser::create([
-            'AnyPromocio' => 2001
+        //ESTUDISUSER
+        $eu1 = EstudisUser::create([
+            'anyPromocio' => 2001,
         ]);
 
-        $eu1->users()->attach($u2);
-        $eu1->estudis()->attach($e1);*/
+        $eu1->users()->associate($u1)->save();
+        $eu1->estudis()->associate($s2)->save();
+
+        //ENVIAMENTS
+
+        $o1->users()->attach($u2);
+        $o2->users()->attach($u1);
     }
 }

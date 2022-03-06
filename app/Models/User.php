@@ -36,7 +36,7 @@ class User extends Authenticatable
     }
 
     public function estudisuser(){
-        return $this->belongsTo(EstudisUser::class);
+        return $this->hasMany(EstudisUser::class);
     }
 
     /**

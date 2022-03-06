@@ -13,7 +13,7 @@ class Estudis extends Model
     protected $fillable = ['nom'];
 
     public function estudisuser(){
-        return $this->belongsTo(EstudisUser::class);
+        return $this->hasMany(EstudisUser::class);
     }
 
     public function ofertes()

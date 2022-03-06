@@ -9,13 +9,13 @@ class EstudisUser extends Model
 {
     use HasFactory;
     protected $table = "estudisuser";
-    protected $primaryKey = ["IdEstudiUser"];
+    protected $primaryKey = "IdEstudiUser";
     protected $fillable = ["IdEstudi", "IdUsuari","AnyPromocio"];
 
     public function users(){
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'IdUsuari');
     }
     public function estudis(){
-        return $this->hasMany(Estudis::class);
+        return $this->belongsTo(Estudis::class, 'IdEstudi');
     }
 }
