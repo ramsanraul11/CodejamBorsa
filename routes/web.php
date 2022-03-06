@@ -36,14 +36,17 @@ Route::get('/paramOpcional/{id?}/{user?}',function($id=null,$user=null){
 });*/
 
 Route::group(['prefix' => 'empresa'], function () {
+    //GET
     Route::get('/', [App\Http\Controllers\HomeController::class, 'empresesShow'])->name('empresesShow');
 
+    //ADD
     Route::get('/add',[App\Http\Controllers\HomeController::class, 'loadAddEmpresaView'])->name('loadAddEmpresaView');
     Route::post('/add',[App\Http\Controllers\HomeController::class, 'addEmpresa'])->name('addEmpresa');
 
-
+    //EDIT
     Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editEmpresa'])->name('editEmpresa');
     Route::post('/editEmpresa', [App\Http\Controllers\HomeController::class, 'submitEmpresaEdit'])->name('submitEmpresaEdit');
+
 
     Route::group(['prefix' => 'oferta'], function () {
         Route::get('/', function (){
@@ -60,6 +63,18 @@ Route::group(['prefix' => 'empresa'], function () {
         });
     });
 });
+
+Route::group(['prefix' => 'estudi'], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'estudisShow'])->name('estudisShow');
+
+    Route::get('/add',[App\Http\Controllers\HomeController::class, 'loadAddEstudiView'])->name('loadAddEstudiView');
+    Route::post('/add',[App\Http\Controllers\HomeController::class, 'addEstudi'])->name('addEstudi');
+
+    Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editEstudi'])->name('editEstudi');
+    Route::post('/editEstudi', [App\Http\Controllers\HomeController::class, 'submitEstudiEdit'])->name('submitEstudiEdit');
+
+});
+
 
 Route::get('/fitxa', [App\Http\Controllers\HomeController::class, 'editUserProfile'])->name('editUserProfile');
 Route::post('/actualizarFitxa', [App\Http\Controllers\HomeController::class, 'updateUserProfile'])->name('updateUserProfile');

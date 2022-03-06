@@ -122,4 +122,42 @@ class HomeController extends Controller
 
         return redirect()->route('home');
     }
+
+    public function loadAddEstudiView(){
+        return view('estudi.estudi_add');
+    }
+
+    public function submitEstudiEdit(Request $request){
+        $nom = $request->NameEstudi;
+        $id = $request->IdEstudi;
+        $data = [
+            'nom' => $nom
+        ];
+        $estu=Estudis::findOrFail($id);
+        $estu->update($data);
+        return redirect()->route('estudisShow');
+    }
+
+    public function addEstudi(Request $request){
+        $nom = $request->NameEstudi;
+        $data = [
+            'nom' => $nom
+        ];
+
+        Estudis::create($data);
+
+        return redirect()->route('estudisShow');
+    }
+
+    public function estudisShow(){
+        $estudis =  Estudis::paginate(5);
+
+        return View::make('estudi.estudi', compact('estudis'));
+    }
+
+    public function editEstudi($id = null){
+        $estudi =  Estudis::findOrFail($id);
+
+        return View::make('estudi.estudi_edit', compact('estudi'));
+    }
 }
