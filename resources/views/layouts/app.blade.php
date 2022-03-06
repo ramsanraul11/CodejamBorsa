@@ -62,11 +62,11 @@
                                     <a class="dropdown-item" href="{{ route('empresesShow') }}">
                                         {{ __('Empresas') }}
                                     </a>
-                                @endif
-                                @if(Auth::user()->isCoordinador == false)
                                     <a class="dropdown-item" href="{{ route('estudisShow') }}">
                                         {{ __('Estudis') }}
                                     </a>
+                                @endif
+                                @if(Auth::user()->isCoordinador == false)
                                     <a class="dropdown-item" href="{{ route('editUserProfile') }}">
                                         {{ __('Profile') }}
                                     </a>
