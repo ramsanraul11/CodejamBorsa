@@ -1,15 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Empreses;
 use App\Models\Estudis;
 use App\Models\EstudisUser;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FitxaController extends Controller
 {
@@ -37,11 +37,7 @@ class FitxaController extends Controller
     public function editUserProfile()
     {
         $user = auth()->user();
-        $titulos = Estudis::All();
-        $anys = ['2000','2001','2002','2003','2004','2005','2006','2007','2008',
-            '2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019',
-            '2020','2021','2022'];
-        return View::make('titulado.titulado_editperfil', compact('user','titulos','anys'));
+        return View::make('titulado.titulado_editperfil', compact('user'));
     }
     //cuando intentamos guardar el user llamamos a esta funcion con un post que esta en las rutas
     public function updateUserProfile(Request $request){
@@ -65,11 +61,36 @@ class FitxaController extends Controller
         ];
         $user = User::find($request -> IdTitulado);
         $user->update($data);
-        //$idestudi = $request -> titulos;
-        $user = User::find($request -> IdTitulado);
-        $estudi = Estudis::find($request -> titulos);
+        return redirect()->route('home');
+    }
 
+    //mostra una llista amb tots els estudis d'un user
+    public function userStudies(){
+        $user = auth()->user();
+        $ue = DB::table('estudisuser as UE')
+        ->select('UE.*','E.nom')
+        ->join('estudis as E','E.IdEstudi','=','UE.IdEstudi')
+        ->where('IdUsuari',$user->id)
+        ->get();
+        //$ue = DB::table('estudisuser')->where('IdUsuari',$user->id)->get();
+        return View::make('titulado.titulado_estudis',compact('ue','user'));
+    }
+
+    public function addStudyView(){
+        $user = auth()->user();
+        $username = $user->name." ".$user->surname;
+        $titulos = Estudis::All();
+        $anys = ['2000','2001','2002','2003','2004','2005','2006','2007','2008',
+            '2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019',
+            '2020','2021','2022'];
+        return View::make('titulado.titulado_addtitulo',compact('titulos','anys','username'));
+    }
+
+    public function addUserStudy(Request $request){
         $eu = new EstudisUser();
+
+        $user = auth()->user();
+        $estudi = Estudis::find($request -> titulos);
 
         $eu -> users() -> associate($user)->save();
         $eu -> estudis() -> associate($estudi)->save();
@@ -77,14 +98,9 @@ class FitxaController extends Controller
         $anypromocio = (int)$anypromocio;
         $eu -> AnyPromocio = $anypromocio;
         $eu -> save();
-
-        return redirect()->route('home');
+        return redirect()->route('userStudies');
     }
+    public function removeUserStudy($id){
 
-    //mostra una llista amb tots els estudis d'un user
-    public function userStudies(){
-        $userid = auth()->user()->id;
-
-        return 'vista nova per user studies '.$userid;
     }
 }

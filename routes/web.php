@@ -80,8 +80,9 @@ Route::group(['prefix' => 'fitxa'], function () {
     Route::post('/', [App\Http\Controllers\FitxaController::class, 'updateUserProfile'])->name('updateUserProfile');
 
     Route::get('/estudis',[App\Http\Controllers\FitxaController::class, 'userStudies'])->name('userStudies');
-    Route::get('/estudis/{id}',[App\Http\Controllers\FitxaController::class, 'userStudyEdit'])->name('userStudyEdit');
 
+    Route::get('/estudis/addTitulo',[App\Http\Controllers\FitxaController::class, 'addStudyView'])->name('addStudyView');
+    Route::post('/estudis/addTitulo',[App\Http\Controllers\FitxaController::class, 'addUserStudy'])->name('addUserStudy');
 });
 /**
 Route::get('/fitxa', [App\Http\Controllers\HomeController::class, 'editUserProfile'])->name('editUserProfile');
