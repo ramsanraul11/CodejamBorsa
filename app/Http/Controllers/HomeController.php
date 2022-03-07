@@ -101,6 +101,24 @@ class HomeController extends Controller
         return View::make('oferta.oferta_edit', compact('oferta'),compact('empreses'));
     }
 
+    public function submitOfertaEdit(Request $request){
+        $desc = $request->EditDescripcionOferta;
+        $isPendent = $request->EditPendentOferta;
+        $empresa = $request->EditEmpresaOferta;
+        $emp=Empreses::findOrFail($empresa);
+
+        $oferta = Ofertes::findOrFail($request->IdOferta);
+
+        $oferta->empreses()->associate($emp);
+        $data = [
+            'descripcio' => $desc,
+            'pendentEnviament' => $isPendent
+        ];
+        $oferta->update($data);
+        $oferta->save();
+        return redirect()->route('empresesShow');
+    }
+
     public function loadAddEstudiView(){
         return view('estudi.estudi_add');
     }
