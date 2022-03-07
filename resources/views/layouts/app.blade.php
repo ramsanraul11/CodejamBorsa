@@ -126,6 +126,11 @@
     const addOfertaToEmpresa = (id) => {
         window.location.href = `/empresa/oferta/add/${id}`;
     }
+
+    const editEstudiant = (id) => {
+        window.location.href = `/students/edit/${id}`;
+
+    }
 </script>
 </body>
 </html>

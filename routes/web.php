@@ -75,6 +75,8 @@ Route::group(['prefix' => 'estudi'], function () {
 
 Route::group(['prefix' => 'students'], function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'estudiantsShow'])->name('estudiantsShow');
+    Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'estudiantsEdit'])->name('estudiantsEdit');
+    Route::post('/edit', [App\Http\Controllers\HomeController::class, 'SubmitestudiantsEdit'])->name('SubmitestudiantsEdit');
 });
 
 Route::group(['prefix' => 'fitxa'], function () {

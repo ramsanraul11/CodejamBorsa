@@ -50,7 +50,7 @@
                                         <td> {{$user->pathFile}} / {{$user->nameFile}} </td>
                                     @endif
                                     <td>
-                                        <button type="button" class="btn btn-success" onclick="editEstudi({{$user->id}})"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-success" onclick="editEstudiant({{$user->id}})"><i class="fas fa-edit"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

@@ -51,6 +51,36 @@ class HomeController extends Controller
         return redirect()->route('empresesShow');
     }
 
+    public function SubmitestudiantsEdit(Request $request){
+        $nom = $request -> NameTitulado;
+        $cognom = $request -> SurnameTitulado;
+        $email = $request -> EmailTitulado;
+        $dni = $request -> DNITitulado;
+        $telefono = $request -> TelefonTitulado;
+        if ($request -> isTreballant == null){
+            $treballant = false;
+        } else {
+            $treballant = true;
+        }
+        if ($request -> isCoordinador == null){
+            $coordinant = false;
+        } else {
+            $coordinant = true;
+        }
+
+        $user = User::find($request -> IdTitulado);
+        $user->name = $nom;
+        $user->surname=$cognom;
+        $user->email =$email;
+        $user->dni =$dni;
+        $user->telefon =$telefono;
+        $user->isTreballant =$treballant;
+        $user->isCoordinador =$coordinant;
+        $user->save();
+        return redirect()->route('estudiantsShow');
+    }
+
+
     public function loadAddEmpresaView(){
         return view('empresa.empresa_add');
     }
@@ -87,6 +117,12 @@ class HomeController extends Controller
                     get();
         return View::make('EstudiantsUsers.estudiantes', compact('users'));
 
+    }
+
+    public function estudiantsEdit($id = null){
+        $user =  User::findOrFail($id);
+
+        return View::make('EstudiantsUsers.estudiantes_edit', compact('user'));
     }
 
     public function ofertesShow(){
