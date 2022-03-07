@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     public function ofertes()
     {
-        return $this->belongsToMany(Ofertes::class, 'enviaments', 'IdUsuari', 'IdOferta')->withTimestamps();
+        return $this->belongsToMany(Ofertes::class, 'enviaments', 'IdOferta', 'IdUsuari')->withTimestamps();
     }
 
     public function estudisuser(){

@@ -232,9 +232,10 @@ class HomeController extends Controller
     }
 
     public function enviarOferta(){
+        echo 'HOLAAAAAAAAAAAAA';
         $ofertesPendents = DB::table('ofertes')
             ->select('*')
-            ->where('pendentEnviament', '=', 0)
+            ->where('pendentEnviament', '=', 1)
             ->get();
 
         $usersNotWorking = DB::table('users')
@@ -242,11 +243,41 @@ class HomeController extends Controller
             ->where('isCoordinador', '=', 0)
             ->where('isTreballant', '=', 0)
             ->get();
-
+       //var_dump($usersNotWorking);
         foreach ($ofertesPendents as $oferta) {
+            $estudisO = DB::table('ofertesestudis')
+                ->select('*')
+                ->where('IdOferta', '=', $oferta->IdOferta)
+                ->get();
+            //var_dump($estudisO);
             foreach ($usersNotWorking as $user){
-                User::find($user->id)->ofertes($oferta)->save();
+               $estudisU = DB::table('estudisuser')
+                   ->select('*')
+                   ->where('IdUsuari', '=', $user->id)
+                   ->get();
+
+               //var_dump($estudisU);
+               foreach ($estudisU as $eu){
+                   foreach($estudisO as $eo){
+                       if($eu->IdEstudi == $eo->IdEstudi){
+                           $o = Ofertes::findOrFail($oferta->IdOferta);
+                           $u = User::findOrFail($user->id);
+                           $o->users()->attach($u);
+                           $o->save();
+                           $o->pendentEnviament = 0;
+                           $o->save();
+                       }
+                   }
+
+               }
+
             }
         }
+
+        //ofertesestudis --> nomes s'envien les ofertes als alumnes que tenen aquests estudis
+        // i no estan treballant i si encara no s'ha enviat la oferta
+
+        // array users que no son coordinadors
+        //comprovo si treballen o no
     }
 }
