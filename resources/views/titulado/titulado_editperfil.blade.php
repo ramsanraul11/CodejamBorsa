@@ -42,9 +42,10 @@
                                     <input type="checkbox" id="isTreballant" name="isTreballant[]" class="switch-input" value="{{$user->isTreballant}}" @if($user->isTreballant) checked @endif />
                                 </div>
                             </div>
-                            <div class="row-cols-md-3">
-                                <button type="submit" class="btn btn-primary mt-5">Submit</button>
-                                <button type="button" class="btn btn-primary mt-5" onclick="window.location='/fitxa/estudis'">Llista estudis</button>
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary col-md-4">Submit</button>
+                                <button type="button" class="btn btn-secondary col-md-4" onclick="window.location='/fitxa/estudis'">Llista estudis</button>
+                                <button type="button" class="btn btn-warning col-md-4" onclick="window.location='/fitxa/estudis'">Pujar CV</button>
                             </div>
                         </form>
                     </div>
