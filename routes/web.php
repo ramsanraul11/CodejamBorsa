@@ -50,11 +50,13 @@ Route::group(['prefix' => 'empresa'], function () {
 
     Route::group(['prefix' => 'oferta'], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'ofertesShow'])->name('ofertesShow');
-        Route::get('/add/{idempresa}',function($idempresa){
-            return 'El id empresa és ' . $idempresa;
-        });
+
+        Route::get('/add/{id}',[App\Http\Controllers\HomeController::class, 'addOferta'])->name('addOferta');
+        Route::post('/addOferta',[App\Http\Controllers\HomeController::class, 'submitOfertaAdd'])->name('submitOfertaAdd');
+
+
         Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editOferta'])->name('editOferta');
-        Route::post('/editEmpresa', [App\Http\Controllers\HomeController::class, 'submitEmpresaEdit'])->name('submitEmpresaEdit');
+        Route::post('/editOferta', [App\Http\Controllers\HomeController::class, 'submitOfertaEdit'])->name('submitOfertaEdit');
 
         Route::get('/enviar', [App\Http\Controllers\HomeController::class, 'enviarOferta'])->name('enviarOferta');
     });
@@ -71,9 +73,17 @@ Route::group(['prefix' => 'estudi'], function () {
 
 });
 
+Route::group(['prefix' => 'students'], function () {
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'estudiantsShow'])->name('estudiantsShow');
+    Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'estudiantsEdit'])->name('estudiantsEdit');
+    Route::post('/edit', [App\Http\Controllers\HomeController::class, 'SubmitestudiantsEdit'])->name('SubmitestudiantsEdit');
+});
+
 Route::group(['prefix' => 'fitxa'], function () {
     Route::get('/', [App\Http\Controllers\FitxaController::class, 'editUserProfile'])->name('editUserProfile');
     Route::post('/', [App\Http\Controllers\FitxaController::class, 'updateUserProfile'])->name('updateUserProfile');
+
+
 
     Route::get('/estudis',[App\Http\Controllers\FitxaController::class, 'userStudies'])->name('userStudies');
 
@@ -91,4 +101,4 @@ Route::get('/fitxa', [App\Http\Controllers\HomeController::class, 'editUserProfi
 Route::post('/actualizarFitxa', [App\Http\Controllers\HomeController::class, 'updateUserProfile'])->name('updateUserProfile');
 **/
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

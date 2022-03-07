@@ -13,7 +13,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form  method="POST" action="/estudi/editEstudi">
+                        <form  method="POST" action="/empresa/oferta/editOferta">
                             @csrf
                             <input type="number" name="IdOferta" style="display: none" value="{{$oferta->IdOferta}}"/>
                             <div class="form-group">
@@ -24,16 +24,20 @@
                                 <div class="form-group">
                                     <label for="InputEditPendentEnviar">Està pendent d'enviament?</label>
                                     @if($oferta->pendentEnviament == 1)
-                                        <input type="checkbox" name="EditPendentOferta"  id="InputEditPendentEnviar" placeholder="Està pendent?" checked>
+                                        <input type="checkbox" name="EditPendentOferta"  id="InputEditPendentEnviar" placeholder="Està pendent?" value="1" {{ old('pendentEnviament') ? 'checked="checked"' : '' }} checked>
                                     @else
-                                        <input type="checkbox" name="EditPendentOferta"  id="InputEditPendentEnviar" placeholder="Està pendent?">
+                                        <input type="checkbox" name="EditPendentOferta"  id="InputEditPendentEnviar" value="1" {{ old('pendentEnviament') ? 'checked="checked"' : '' }} placeholder="Està pendent?">
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label for="InputEditEmpresaOferta">Empresa</label>
                                     <select class="form-control custom-select" id="InputEditEmpresaOferta" name="EditEmpresaOferta">
                                         @foreach ($empreses as $empresa)
-                                            <option value="{{ $empresa->IdEmpresa }}">{{ $empresa->nom }}</option>
+                                            @if($empresa->IdEmpresa == $oferta->IdEmpresa)
+                                                <option value="{{ $empresa->IdEmpresa }}" selected>{{ $empresa->nom }}</option>
+                                            @else
+                                                <option value="{{ $empresa->IdEmpresa }}">{{ $empresa->nom }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

@@ -51,6 +51,36 @@ class HomeController extends Controller
         return redirect()->route('empresesShow');
     }
 
+    public function SubmitestudiantsEdit(Request $request){
+        $nom = $request -> NameTitulado;
+        $cognom = $request -> SurnameTitulado;
+        $email = $request -> EmailTitulado;
+        $dni = $request -> DNITitulado;
+        $telefono = $request -> TelefonTitulado;
+        if ($request -> isTreballant == null){
+            $treballant = false;
+        } else {
+            $treballant = true;
+        }
+        if ($request -> isCoordinador == null){
+            $coordinant = false;
+        } else {
+            $coordinant = true;
+        }
+
+        $user = User::find($request -> IdTitulado);
+        $user->name = $nom;
+        $user->surname=$cognom;
+        $user->email =$email;
+        $user->dni =$dni;
+        $user->telefon =$telefono;
+        $user->isTreballant =$treballant;
+        $user->isCoordinador =$coordinant;
+        $user->save();
+        return redirect()->route('estudiantsShow');
+    }
+
+
     public function loadAddEmpresaView(){
         return view('empresa.empresa_add');
     }
@@ -80,25 +110,87 @@ class HomeController extends Controller
         return View::make('empresa.empresa_edit', compact('empresa'));
     }
 
+    public function estudiantsShow(){
+        $users = DB::table('users')->
+                    select('*')->
+                    where('isCoordinador', '=', 0)->
+                    get();
+        return View::make('EstudiantsUsers.estudiantes', compact('users'));
+
+    }
+
+    public function estudiantsEdit($id = null){
+        $user =  User::findOrFail($id);
+
+        return View::make('EstudiantsUsers.estudiantes_edit', compact('user'));
+    }
+
     public function ofertesShow(){
 
         if(Auth::user()->isCoordinador == true){
-            $ofertes =  Ofertes::all();
+            $ofertes =  DB::table('ofertes')->get();
         }else{
             $ofertes = DB::table('ofertes')
                 ->join('enviaments', 'ofertes.IdOferta', '=', 'enviaments.IdOferta')
                 ->select('ofertes.*')
                 ->where('enviaments.IdUsuari', '=', Auth::user()->id)
                 ->get();
+//            $estudis = DB::table('estudis')
+//                ->join('ofertesestudis', 'estudis.IdEstudi', '=', 'ofertesestudis.IdEstudi')
+//                ->select('estudis.*')
+//                ->where('ofertesestudis.IdOferta', '=', $ofertes->IdOferta)
+//                ->get();
+//
+//            $data = [
+//                'ofertas'
+//            ];
         }
 
         return View::make('oferta.ofertas', compact('ofertes'));
+//        return response()->json($ofertes);
     }
 
     public function editOferta($id = null){
         $oferta =  Ofertes::findOrFail($id);
         $empreses = Empreses::all();
         return View::make('oferta.oferta_edit', compact('oferta'),compact('empreses'));
+    }
+
+    public function addOferta($id = null){
+        $empresa =  Empreses::findOrFail($id);
+        return View::make('oferta.oferta_add', compact('empresa'));
+    }
+    public function submitOfertaAdd(Request $request){
+        $desc = $request->EditDescripcionOferta;
+        $isPendent = true;
+        $empresa = $request->EditEmpresaOferta;
+        $emp=Empreses::findOrFail($empresa);
+
+        $data = [
+            'descripcio' => $desc,
+            'pendentEnviament' => $isPendent
+        ];
+        $oferta = Ofertes::create($data);
+        $oferta->empreses()->associate($emp)->save();
+        return redirect()->route('ofertesShow');
+    }
+
+    public function submitOfertaEdit(Request $request){
+        $desc = $request->EditDescripcionOferta;
+        $isPendent = $request->has('EditPendentOferta');
+        $empresa = $request->EditEmpresaOferta;
+        $emp=Empreses::findOrFail($empresa);
+
+        $oferta = Ofertes::findOrFail($request->IdOferta);
+
+        $oferta->empreses()->associate($emp);
+        $data = [
+            'descripcio' => $desc,
+            'pendentEnviament' => $isPendent
+        ];
+        $oferta->update($data);
+        $oferta->save();
+        return redirect()->route('ofertesShow');
     }
 
     public function loadAddEstudiView(){
@@ -140,7 +232,21 @@ class HomeController extends Controller
     }
 
     public function enviarOferta(){
-        // array users que no son coordinadors
-        //comprovo si treballen o no
+        $ofertesPendents = DB::table('ofertes')
+            ->select('*')
+            ->where('pendentEnviament', '=', 0)
+            ->get();
+
+        $usersNotWorking = DB::table('users')
+            ->select('*')
+            ->where('isCoordinador', '=', 0)
+            ->where('isTreballant', '=', 0)
+            ->get();
+
+        foreach ($ofertesPendents as $oferta) {
+            foreach ($usersNotWorking as $user){
+                User::find($user->id)->ofertes($oferta)->save();
+            }
+        }
     }
 }

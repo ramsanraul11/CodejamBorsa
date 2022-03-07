@@ -5,7 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Ofertes') }}</div>
+                <div class="card-header">
+                    <div class="row row-cols-2 justify-content-evenly">
+                        <div class="col-9 align-self-center">{{ __('Ofertes') }}</div>
+                        <div class="col-3"><button class="btn btn-outline-dark" type="button" onclick="enviarOfertas()">Enviar ofertes pendents <i class="fa-solid fa-paper-plane"></i></button></div>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     @if (session('status'))

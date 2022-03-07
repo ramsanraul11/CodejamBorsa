@@ -65,6 +65,9 @@
                                     <a class="dropdown-item" href="{{ route('estudisShow') }}">
                                         {{ __('Estudis') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('estudiantsShow') }}">
+                                        {{ __('Estudiantes') }}
+                                    </a>
                                 @endif
                                 @if(Auth::user()->isCoordinador == false)
                                     <a class="dropdown-item" href="{{ route('editUserProfile') }}">
@@ -118,6 +121,18 @@
 
     const editOferta = (id) => {
         window.location.href = `/empresa/oferta/edit/${id}`;
+    }
+
+    const addOfertaToEmpresa = (id) => {
+        window.location.href = `/empresa/oferta/add/${id}`;
+    }
+
+    const editEstudiant = (id) => {
+        window.location.href = `/students/edit/${id}`;
+    }
+
+    const enviarOfertas = () => {
+        window.location.href = `/empresa/oferta/enviar`;
     }
 </script>
 </body>

@@ -35,7 +35,14 @@
                                     <td> {{$empresa->nom}} </td>
                                     <td> {{$empresa->email}} </td>
                                     <td>
-                                        <button type="button" class="btn btn-success" onclick="editEmpresa({{$empresa->IdEmpresa}})"><i class="fas fa-edit"></i></button>
+                                        <button type="button" title="Editar empresa" class="btn btn-success" onclick="editEmpresa({{$empresa->IdEmpresa}})">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" title="Afegir oferta" class="btn btn-warning" onclick="addOfertaToEmpresa({{$empresa->IdEmpresa}})">
+                                            <i class="fa-solid fa-house-chimney-medical"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
