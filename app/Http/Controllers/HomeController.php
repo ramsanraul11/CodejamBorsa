@@ -232,7 +232,21 @@ class HomeController extends Controller
     }
 
     public function enviarOferta(){
-        // array users que no son coordinadors
-        //comprovo si treballen o no
+        $ofertesPendents = DB::table('ofertes')
+            ->select('*')
+            ->where('pendentEnviament', '=', 0)
+            ->get();
+
+        $usersNotWorking = DB::table('users')
+            ->select('*')
+            ->where('isCoordinador', '=', 0)
+            ->where('isTreballant', '=', 0)
+            ->get();
+
+        foreach ($ofertesPendents as $oferta) {
+            foreach ($usersNotWorking as $user){
+                User::find($user->id)->ofertes($oferta)->save();
+            }
+        }
     }
 }

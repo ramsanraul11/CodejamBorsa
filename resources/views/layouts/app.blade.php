@@ -129,7 +129,10 @@
 
     const editEstudiant = (id) => {
         window.location.href = `/students/edit/${id}`;
+    }
 
+    const enviarOfertas = () => {
+        window.location.href = `/empresa/oferta/enviar`;
     }
 </script>
 </body>
