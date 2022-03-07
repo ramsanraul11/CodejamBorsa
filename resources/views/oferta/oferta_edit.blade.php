@@ -33,7 +33,11 @@
                                     <label for="InputEditEmpresaOferta">Empresa</label>
                                     <select class="form-control custom-select" id="InputEditEmpresaOferta" name="EditEmpresaOferta">
                                         @foreach ($empreses as $empresa)
-                                            <option value="{{ $empresa->IdEmpresa }}">{{ $empresa->nom }}</option>
+                                            @if($empresa->IdEmpresa == $oferta->IdEmpresa)
+                                                <option value="{{ $empresa->IdEmpresa }}" selected>{{ $empresa->nom }}</option>
+                                            @else
+                                                <option value="{{ $empresa->IdEmpresa }}">{{ $empresa->nom }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

@@ -50,9 +50,11 @@ Route::group(['prefix' => 'empresa'], function () {
 
     Route::group(['prefix' => 'oferta'], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'ofertesShow'])->name('ofertesShow');
-        Route::get('/add/{idempresa}',function($idempresa){
-            return 'El id empresa és ' . $idempresa;
-        });
+
+        Route::get('/add/{id}',[App\Http\Controllers\HomeController::class, 'addOferta'])->name('addOferta');
+        Route::post('/addOferta',[App\Http\Controllers\HomeController::class, 'submitOfertaAdd'])->name('submitOfertaAdd');
+
+
         Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editOferta'])->name('editOferta');
         Route::post('/editOferta', [App\Http\Controllers\HomeController::class, 'submitOfertaEdit'])->name('submitOfertaEdit');
 
@@ -85,4 +87,4 @@ Route::get('/fitxa', [App\Http\Controllers\HomeController::class, 'editUserProfi
 Route::post('/actualizarFitxa', [App\Http\Controllers\HomeController::class, 'updateUserProfile'])->name('updateUserProfile');
 **/
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
