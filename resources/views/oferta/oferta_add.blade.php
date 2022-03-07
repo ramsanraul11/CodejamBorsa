@@ -22,13 +22,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputEditPendentEnviar">Està pendent d'enviament?</label>
-                                    <input type="checkbox" name="EditPendentOferta"  id="InputEditPendentEnviar" value="1" checked readonly="readonly">
+                                    <input type="checkbox" name="EditPendentOferta"  id="InputEditPendentEnviar" value="1" checked disabled>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="InputEditEmpresaOferta">Empresa</label>
-                                    <select class="form-control custom-select" id="InputEditEmpresaOferta" name="EditEmpresaOferta" readonly="readonly">
-                                        <option value="{{ $empresa->IdEmpresa }}" selected>{{ $empresa->nom }}</option>
+                                    <select class="form-control custom-select" id="InputEditEmpresaOferta" name="EditEmpresaOferta">
+                                        <option value="{{ $empresa->IdEmpresa }}" selected readonly="readonly">{{ $empresa->nom }}</option>
                                     </select>
                                 </div>
                             </div>

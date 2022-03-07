@@ -80,19 +80,38 @@ class HomeController extends Controller
         return View::make('empresa.empresa_edit', compact('empresa'));
     }
 
+    public function estudiantsShow(){
+        $users = DB::table('users')->
+                    select('*')->
+                    where('isCoordinador', '=', 0)->
+                    get();
+        return View::make('EstudiantsUsers.estudiantes', compact('users'));
+
+    }
+
     public function ofertesShow(){
 
         if(Auth::user()->isCoordinador == true){
-            $ofertes =  Ofertes::all();
+            $ofertes =  DB::table('ofertes')->get();
         }else{
             $ofertes = DB::table('ofertes')
                 ->join('enviaments', 'ofertes.IdOferta', '=', 'enviaments.IdOferta')
                 ->select('ofertes.*')
                 ->where('enviaments.IdUsuari', '=', Auth::user()->id)
                 ->get();
+//            $estudis = DB::table('estudis')
+//                ->join('ofertesestudis', 'estudis.IdEstudi', '=', 'ofertesestudis.IdEstudi')
+//                ->select('estudis.*')
+//                ->where('ofertesestudis.IdOferta', '=', $ofertes->IdOferta)
+//                ->get();
+//
+//            $data = [
+//                'ofertas'
+//            ];
         }
 
         return View::make('oferta.ofertas', compact('ofertes'));
+//        return response()->json($ofertes);
     }
 
     public function editOferta($id = null){
@@ -118,7 +137,6 @@ class HomeController extends Controller
         $oferta = Ofertes::create($data);
         $oferta->empreses()->associate($emp)->save();
         return redirect()->route('ofertesShow');
-//        return 'ola';
     }
 
     public function submitOfertaEdit(Request $request){

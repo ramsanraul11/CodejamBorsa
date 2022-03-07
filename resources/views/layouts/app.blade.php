@@ -65,6 +65,9 @@
                                     <a class="dropdown-item" href="{{ route('estudisShow') }}">
                                         {{ __('Estudis') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('estudiantsShow') }}">
+                                        {{ __('Estudiantes') }}
+                                    </a>
                                 @endif
                                 @if(Auth::user()->isCoordinador == false)
                                     <a class="dropdown-item" href="{{ route('editUserProfile') }}">
