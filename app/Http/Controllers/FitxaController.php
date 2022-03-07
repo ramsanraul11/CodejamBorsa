@@ -88,7 +88,7 @@ class FitxaController extends Controller
         $eu = new EstudisUser;
 
         $user = auth()->user();
-        $estudi = Estudis::find($request -> titulos);
+        $estudi = Estudis::findOrFail($request -> titulos);
 
         $eu->users()->associate($user);
         $eu->estudis()->associate($estudi);

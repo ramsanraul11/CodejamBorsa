@@ -56,9 +56,7 @@ Route::group(['prefix' => 'empresa'], function () {
         Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editOferta'])->name('editOferta');
         Route::post('/editOferta', [App\Http\Controllers\HomeController::class, 'submitOfertaEdit'])->name('submitOfertaEdit');
 
-        Route::get('/enviar', function (){
-            return 'PAgina empresa/oferta/enviar';
-        });
+        Route::get('/enviar', [App\Http\Controllers\HomeController::class, 'enviarOferta'])->name('enviarOferta');
     });
 });
 

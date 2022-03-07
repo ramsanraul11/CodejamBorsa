@@ -156,4 +156,9 @@ class HomeController extends Controller
 
         return View::make('estudi.estudi_edit', compact('estudi'));
     }
+
+    public function enviarOferta(){
+        // array users que no son coordinadors
+        //comprovo si treballen o no
+    }
 }
