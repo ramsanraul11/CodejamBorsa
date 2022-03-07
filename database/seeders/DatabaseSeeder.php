@@ -21,12 +21,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $u1 = User::create([
-            'name' => 'test',
-            'surname' => 'test testing',
-            'email' => 'test@test.com',
+            'name' => 'amina',
+            'surname' => 'amina',
+            'email' => 'amina@sense-son.com',
             'dni' => '23455g',
             'telefon' => 73738393,
-            'password' => Hash::make('testtesttest'),
+            'password' => Hash::make('amina'),
 
         ]);
 
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $u2 = User::create([
             'name' => 'test2',
             'surname' => 'test testing',
-            'email' => 'test2@test.com',
+            'email' => 'test2@sense-son.com',
             'dni' => '23455g',
             'telefon' => 73738393,
             'password' => Hash::make('testtesttest'),

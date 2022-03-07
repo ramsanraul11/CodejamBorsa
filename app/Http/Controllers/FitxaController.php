@@ -51,16 +51,14 @@ class FitxaController extends Controller
         } else {
             $treballant = true;
         }
-        $data = [
-            'nom' => $nom,
-            'surname' => $cognom,
-            'email' => $email,
-            'dni' => $dni,
-            'telefon' => $telefono,
-            'isTreballant' => $treballant,
-        ];
         $user = User::find($request -> IdTitulado);
-        $user->update($data);
+        $user->name = $nom;
+        $user->surname=$cognom;
+        $user->email =$email;
+        $user->dni =$dni;
+        $user->telefon =$telefono;
+        $user->isTreballant =$treballant;
+        $user->save();
         return redirect()->route('home');
     }
 
@@ -87,16 +85,16 @@ class FitxaController extends Controller
     }
 
     public function addUserStudy(Request $request){
-        $eu = new EstudisUser();
+        $eu = new EstudisUser;
 
         $user = auth()->user();
         $estudi = Estudis::find($request -> titulos);
 
-        $eu -> users() -> associate($user)->save();
-        $eu -> estudis() -> associate($estudi)->save();
-        $anypromocio = $request -> AnyPromocio;
-        $anypromocio = (int)$anypromocio;
-        $eu -> AnyPromocio = $anypromocio;
+        $eu->users()->associate($user);
+        $eu->estudis()->associate($estudi);
+        $AnyPromocio = $request->AnyPromocio;
+        $AnyPromocio = (int)$AnyPromocio;
+        $eu->AnyPromocio=$AnyPromocio;
         $eu -> save();
         return redirect()->route('userStudies');
     }
