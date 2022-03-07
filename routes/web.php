@@ -49,15 +49,13 @@ Route::group(['prefix' => 'empresa'], function () {
 
 
     Route::group(['prefix' => 'oferta'], function () {
-        Route::get('/', function (){
-            return 'PAgina empresa/oferta';
-        });
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'ofertesShow'])->name('ofertesShow');
         Route::get('/add/{idempresa}',function($idempresa){
             return 'El id empresa és ' . $idempresa;
         });
-        Route::get('/edit/{idoferta}',function($idoferta){
-            return 'El id oferta és ' . $idoferta;
-        });
+        Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editOferta'])->name('editOferta');
+        Route::post('/editEmpresa', [App\Http\Controllers\HomeController::class, 'submitEmpresaEdit'])->name('submitEmpresaEdit');
+
         Route::get('/enviar', function (){
             return 'PAgina empresa/oferta/enviar';
         });

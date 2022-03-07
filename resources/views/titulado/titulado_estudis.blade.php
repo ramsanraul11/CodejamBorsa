@@ -28,9 +28,11 @@
                                 <tr id="{{$estudi->IdEstudiUser}}">
                                     <td> {{$estudi->nom}} </td>
                                     <td> {{$estudi->AnyPromocio}} </td>
+                                    @if(Auth::user()->isCoordinador == true)
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="editEstudi({{$estudi->IdEstudi}})"><i class="fas fa-edit"></i></button>
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

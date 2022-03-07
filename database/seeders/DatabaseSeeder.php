@@ -78,13 +78,13 @@ class DatabaseSeeder extends Seeder
 
         $o1 = Ofertes::create([
             'descripcio' => 'Oferta per C#',
-            'pendentEnviament' => true
+            'pendentEnviament' => false
             //'IdEmpresa' => $e1->IdEmpresa
         ]);
 
         $o2 = Ofertes::create([
             'descripcio' => 'Oferta per Java',
-            'pendentEnviament' => true
+            'pendentEnviament' => false
         ]);
 
         $o3 = Ofertes::create([

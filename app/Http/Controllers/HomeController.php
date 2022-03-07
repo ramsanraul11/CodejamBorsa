@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empreses;
+use App\Models\Enviaments;
 use App\Models\Estudis;
 use App\Models\EstudisUser;
+use App\Models\Ofertes;
 use App\Models\User;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
@@ -76,6 +80,26 @@ class HomeController extends Controller
         return View::make('empresa.empresa_edit', compact('empresa'));
     }
 
+    public function ofertesShow(){
+
+        if(Auth::user()->isCoordinador == true){
+            $ofertes =  Ofertes::all();
+        }else{
+            $ofertes = DB::table('ofertes')
+                ->join('enviaments', 'ofertes.IdOferta', '=', 'enviaments.IdOferta')
+                ->select('ofertes.*')
+                ->where('enviaments.IdUsuari', '=', Auth::user()->id)
+                ->get();
+        }
+
+        return View::make('oferta.ofertas', compact('ofertes'));
+    }
+
+    public function editOferta($id = null){
+        $oferta =  Ofertes::findOrFail($id);
+        $empreses = Empreses::all();
+        return View::make('oferta.oferta_edit', compact('oferta'),compact('empreses'));
+    }
 
     public function loadAddEstudiView(){
         return view('estudi.estudi_add');

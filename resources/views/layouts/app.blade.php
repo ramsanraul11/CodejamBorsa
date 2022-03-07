@@ -71,6 +71,9 @@
                                         {{ __('Profile') }}
                                     </a>
                                 @endif
+                                <a class="dropdown-item" href="{{ route('ofertesShow') }}">
+                                    {{ __('Ofertas') }}
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -107,6 +110,14 @@
 
     const addEstudi = () => {
         window.location.href = `/estudi/add/`;
+    }
+
+    const addOferta = (id) => {
+        window.location.href = `/empresa/oferta/add/${id}`;
+    }
+
+    const editOferta = (id) => {
+        window.location.href = `/empresa/oferta/edit/${id}`;
     }
 </script>
 </body>
