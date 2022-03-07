@@ -45,7 +45,7 @@
                             <div class="row">
                                 <button type="submit" class="btn btn-primary col-md-4">Submit</button>
                                 <button type="button" class="btn btn-secondary col-md-4" onclick="window.location='/fitxa/estudis'">Llista estudis</button>
-                                <button type="button" class="btn btn-warning col-md-4" onclick="window.location='/fitxa/estudis'">Pujar CV</button>
+                                <button type="button" class="btn btn-warning col-md-4" onclick="window.location='/fitxa/CV'">Pujar CV</button>
                             </div>
                         </form>
                     </div>

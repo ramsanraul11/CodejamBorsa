@@ -80,6 +80,10 @@ Route::group(['prefix' => 'fitxa'], function () {
     Route::get('/estudis/addTitulo',[App\Http\Controllers\FitxaController::class, 'addStudyView'])->name('addStudyView');
     Route::post('/estudis/addTitulo',[App\Http\Controllers\FitxaController::class, 'addUserStudy'])->name('addUserStudy');
 
+    Route::get('/CV',[App\Http\Controllers\FitxaController::class, 'showCVView'])->name('showCVView');
+    Route::post('/CV',[App\Http\Controllers\FitxaController::class, 'updatedCV'])->name('updatedCV');
+
+    Route::get('/download/{file}',[App\Http\Controllers\FitxaController::class, 'download'])->name('download');
 
 });
 /**

@@ -7,8 +7,9 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\View;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Stroage;
 use Illuminate\Support\Facades\DB;
 
 class FitxaController extends Controller
@@ -100,5 +101,34 @@ class FitxaController extends Controller
     }
     public function removeUserStudy($id){
 
+    }
+
+    public function showCVView(){
+        $user = auth()->user();
+        return View::make('titulado.titulado_CV',compact('user'));
+    }
+    public function updatedCV(Request $request){
+        $user = auth()->user();
+        if($request->hasFile('pdf')){
+            if($request->pdf->getClientOriginalExtension() != 'pdf'){
+                return redirect()->route('showCVView');
+            }
+            $time = date("d-m-Y")."-".time();
+            $fileName = $time."-".$user->name.$user->surname.".pdf";
+            $archivo = $request->file('pdf');
+
+            if($archivo->move('cv',$fileName)){
+                $oldFile = $user->nameFile;
+                File::delete(public_path('cv/'.$oldFile));
+                $user->nameFile = $fileName;
+                $user->save();
+            }
+
+        }
+        return redirect()->route('showCVView');
+    }
+
+    public function download(Request $request,$file){
+        return response()->download(public_path('cv/'.$file));
     }
 }
