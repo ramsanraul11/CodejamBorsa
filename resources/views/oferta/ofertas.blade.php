@@ -24,6 +24,7 @@
                             <thead>
                             <tr>
                                 <th>Descripcio</th>
+                                <th>Estudis</th>
                                 <th>PendentEnviament</th>
                                 <th>IdEmpresa</th>
                             </tr>
@@ -32,11 +33,23 @@
                             @foreach($ofertes as $oferta)
                                 <tr id="{{$oferta->IdOferta}}">
                                     <td> {{$oferta->descripcio}} </td>
+                                    @foreach($data as $d)
+                                        @if($d['id'] == $oferta->IdOferta)
+                                            @if($d['estudis'] != null)
+                                                <td>{{implode(", ",array_column($d['estudis'], 'nom') )}}</td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
+                                        @endif
+                                    @endforeach
                                     <td> {{$oferta->pendentEnviament}} </td>
                                     <td> {{$oferta->IdEmpresa}} </td>
                                     @if(Auth::user()->isCoordinador == true)
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="editOferta({{$oferta->IdOferta}})"><i class="fas fa-edit"></i></button>
+                                    </td>
+                                    <td>
+                                        <button title="Add oferta" class="btn btn-warning" type="button" onclick="addEstudisToOferta({{$oferta->IdOferta}})"><i class="fa-solid fa-plus"></i></button>
                                     </td>
                                     @endif
                             @endforeach

@@ -31,6 +31,7 @@
                                         <option value="{{ $empresa->IdEmpresa }}" selected readonly="readonly">{{ $empresa->nom }}</option>
                                     </select>
                                 </div>
+{{--                                To do MultiSelect de estudios--}}
                             </div>
                             <button type="submit" class="btn btn-primary mt-5">Submit</button>
                         </form>

@@ -125,6 +125,18 @@ class HomeController extends Controller
         return View::make('EstudiantsUsers.estudiantes_edit', compact('user'));
     }
 
+    public function GetEstudis($id)
+    {
+        $estudis = DB::table('estudis')
+            ->join('ofertesestudis', 'estudis.IdEstudi', '=', 'ofertesestudis.IdEstudi')
+            ->join('ofertes', 'ofertesestudis.IdOferta', '=', 'ofertes.IdOferta')
+            ->select('estudis.IdEstudi', 'estudis.nom')
+            ->where('ofertesestudis.IdOferta', '=', $id)
+            ->get();
+
+        return $estudis;
+    }
+
     public function ofertesShow(){
 
         if(Auth::user()->isCoordinador == true){
@@ -135,18 +147,25 @@ class HomeController extends Controller
                 ->select('ofertes.*')
                 ->where('enviaments.IdUsuari', '=', Auth::user()->id)
                 ->get();
-//            $estudis = DB::table('estudis')
-//                ->join('ofertesestudis', 'estudis.IdEstudi', '=', 'ofertesestudis.IdEstudi')
-//                ->select('estudis.*')
-//                ->where('ofertesestudis.IdOferta', '=', $ofertes->IdOferta)
-//                ->get();
-//
-//            $data = [
-//                'ofertas'
-//            ];
+        }
+        $data = array();
+        foreach ($ofertes as $o){
+
+            $r = DB::table('estudis')
+                ->join('ofertesestudis', 'estudis.IdEstudi', '=', 'ofertesestudis.IdEstudi')
+                ->join('ofertes', 'ofertesestudis.IdOferta', '=', 'ofertes.IdOferta')
+                ->select( 'estudis.nom')
+                ->where('ofertesestudis.IdOferta', '=', $o->IdOferta)
+                ->get();
+            $item = [
+                'id' => $o->IdOferta,
+                'estudis' => json_decode(json_encode($r), true)
+            ];
+            array_push($data, $item);
         }
 
-        return View::make('oferta.ofertas', compact('ofertes'));
+
+        return View::make('oferta.ofertas', compact('ofertes'), compact('data'));
 //        return response()->json($ofertes);
     }
 
