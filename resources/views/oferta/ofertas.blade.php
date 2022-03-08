@@ -8,7 +8,9 @@
                 <div class="card-header">
                     <div class="row row-cols-2 justify-content-evenly">
                         <div class="col-9 align-self-center">{{ __('Ofertes') }}</div>
-                        <div class="col-3"><button class="btn btn-outline-dark" type="button" onclick="enviarOfertas()">Enviar ofertes pendents <i class="fa-solid fa-paper-plane"></i></button></div>
+                        @if(Auth::user()->isCoordinador == true)
+                            <div class="col-3"><button class="btn btn-outline-dark" type="button" onclick="enviarOfertas()">Enviar ofertes pendents <i class="fa-solid fa-paper-plane"></i></button></div>
+                        @endif
                     </div>
                 </div>
 

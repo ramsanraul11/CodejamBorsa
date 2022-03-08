@@ -18,7 +18,7 @@ class Ofertes extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'enviaments', 'IdUsuari', 'IdOferta')->withTimestamps();
+        return $this->belongsToMany(User::class, 'enviaments', 'IdOferta', 'IdUsuari')->withTimestamps();
     }
 
     public function estudis()
