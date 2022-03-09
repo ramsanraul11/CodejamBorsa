@@ -7,6 +7,7 @@ use App\Models\Enviaments;
 use App\Models\Estudis;
 use App\Models\EstudisUser;
 use App\Models\Ofertes;
+use App\Models\OfertesEstudis;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -182,6 +183,7 @@ class HomeController extends Controller
         $empresa =  Empreses::findOrFail($id);
         return View::make('oferta.oferta_add', compact('empresa'));
     }
+
     public function submitOfertaAdd(Request $request){
         $desc = $request->EditDescripcionOferta;
         $isPendent = true;
@@ -212,6 +214,35 @@ class HomeController extends Controller
         ];
         $oferta->update($data);
         $oferta->save();
+        return redirect()->route('ofertesShow');
+    }
+
+    //afegeix un nou estudi a una oferta existent
+    public function addEstudiToOferta($id=null){
+        $idOferta = Ofertes::findOrFail($id);
+
+        $array = Estudis::all();
+        $ofertEstudis = DB::table('ofertesestudis')
+            ->select('*')
+            ->where('IdOferta', '=', $id)
+            ->get()->toArray();
+        $estudis = array();
+        foreach($array as $titulo){
+            $key = array_search($titulo->IdEstudi, array_column($ofertEstudis,'IdEstudi'));
+            if(false!==$key){
+
+            } else {
+                array_push($estudis,$titulo);
+            }
+        }
+        return View::make('oferta.oferta_addtitulo',compact('idOferta','estudis'));
+    }
+    //processes de above
+    public function saveEstudiToOferta(Request $request){
+        $oferta = Ofertes::find($request->id);
+        $estudi = Estudis::find($request->EstudiId);
+
+        $oferta->estudis()->attach($estudi);
         return redirect()->route('ofertesShow');
     }
 

@@ -48,9 +48,6 @@
                                     <td>
                                         <button type="button" class="btn btn-success" onclick="editOferta({{$oferta->IdOferta}})"><i class="fas fa-edit"></i></button>
                                     </td>
-                                    <td>
-                                        <button title="Add oferta" class="btn btn-warning" type="button" onclick="addEstudisToOferta({{$oferta->IdOferta}})"><i class="fa-solid fa-plus"></i></button>
-                                    </td>
                                     @endif
                             @endforeach
                             </tbody>

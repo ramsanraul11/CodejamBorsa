@@ -134,6 +134,9 @@
     const enviarOfertas = () => {
         window.location.href = `/empresa/oferta/enviar`;
     }
+    const addEstudiToOferta = (id) => {
+        window.location.href = `/empresa/oferta/edit/${id}/addEstudi`;
+    }
 </script>
 </body>
 </html>

@@ -41,8 +41,14 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <!-- Esto me lo he patilleado que flipas -->
+                                <div>
+
+                                </div>
+                                <!-- -->
                             </div>
                             <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                            <button type="button" class="btn btn-secondary mt-5" onclick=addEstudiToOferta({{$oferta->IdOferta}})>Afegir Títol</button>
                         </form>
                     </div>
                 </div>
