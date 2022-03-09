@@ -35,6 +35,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if(Auth::check()){
+            return redirect()->route('ofertesShow');
+        }
         return view('home');
     }
 

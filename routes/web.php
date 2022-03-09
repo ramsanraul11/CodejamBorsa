@@ -96,9 +96,6 @@ Route::group(['prefix' => 'fitxa'], function () {
     Route::get('/download/{file}',[App\Http\Controllers\FitxaController::class, 'download'])->name('download');
 
 });
-/**
-Route::get('/fitxa', [App\Http\Controllers\HomeController::class, 'editUserProfile'])->name('editUserProfile');
-Route::post('/actualizarFitxa', [App\Http\Controllers\HomeController::class, 'updateUserProfile'])->name('updateUserProfile');
-**/
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
