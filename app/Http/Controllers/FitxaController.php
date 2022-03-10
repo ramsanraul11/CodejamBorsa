@@ -75,13 +75,36 @@ class FitxaController extends Controller
         return View::make('titulado.titulado_estudis',compact('ue','user'));
     }
 
+    public function borrarTituloFromUser(Request $request){
+
+        return $this->userStudies();
+    }
+
     public function addStudyView(){
         $user = auth()->user();
         $username = $user->name." ".$user->surname;
-        $titulos = Estudis::All();
+
+
         $anys = ['2000','2001','2002','2003','2004','2005','2006','2007','2008',
             '2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019',
             '2020','2021','2022'];
+        $array = Estudis::All();
+        $ue = DB::table('estudisuser as UE')
+            ->select('UE.*','E.nom')
+            ->join('estudis as E','E.IdEstudi','=','UE.IdEstudi')
+            ->where('IdUsuari',$user->id)
+            ->get()->toArray();
+        $titulos = array();
+
+        foreach($array as $titulo){
+            $key = array_search($titulo->IdEstudi, array_column($ue,'IdEstudi'));
+            if(false!==$key){
+
+            } else {
+                array_push($titulos,$titulo);
+            }
+        }
+
         return View::make('titulado.titulado_addtitulo',compact('titulos','anys','username'));
     }
 

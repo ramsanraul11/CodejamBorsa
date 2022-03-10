@@ -141,6 +141,10 @@
     const removeEstudiFromOferta = (id, idEstudi) => {
         window.location.href = `/empresa/oferta/edit/${id}/removeEstudi/${idEstudi}`;
     }
+
+    const borrarTituloFromUser = () => {
+        window.location.href = `/fitxa/estudis/removeStudy`;
+    }
 </script>
 </body>
 </html>

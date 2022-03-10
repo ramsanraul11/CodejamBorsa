@@ -89,9 +89,9 @@ Route::group(['prefix' => 'fitxa'], function () {
     Route::get('/', [App\Http\Controllers\FitxaController::class, 'editUserProfile'])->name('editUserProfile');
     Route::post('/', [App\Http\Controllers\FitxaController::class, 'updateUserProfile'])->name('updateUserProfile');
 
-
-
     Route::get('/estudis',[App\Http\Controllers\FitxaController::class, 'userStudies'])->name('userStudies');
+
+    Route::post('/estudis/removeStudy',[App\Http\Controllers\FitxaController::class, 'borrarTituloFromUser'])->name('borrarTituloFromUser');
 
     Route::get('/estudis/addTitulo',[App\Http\Controllers\FitxaController::class, 'addStudyView'])->name('addStudyView');
     Route::post('/estudis/addTitulo',[App\Http\Controllers\FitxaController::class, 'addUserStudy'])->name('addUserStudy');
