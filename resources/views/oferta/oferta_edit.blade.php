@@ -42,9 +42,26 @@
                                     </select>
                                 </div>
                                 <!-- Esto me lo he patilleado que flipas -->
-                                <div>
+                                <table class="table table-striped table-hover mb-5">
+                                    <thead>
+                                    <tr>
+                                        <th>Estudis de l'oferta</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($ofertEstudis as $estudis)
+                                        <tr id="{{$estudis->IdEstudi}}">
+                                            <td> {{$estudis->nom}} </td>
+                                            <td>
+                                                <button type="button" title="Borrar Estudi de l'oferta" class="btn btn-error" onclick="removeEstudiFromOferta({{$oferta->IdOferta}},{{$estudis->IdEstudi}})">
+                                                    <i class="fas fa-close"></i>
+                                                </button>
+                                            </td>
 
-                                </div>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                                 <!-- -->
                             </div>
                             <button type="submit" class="btn btn-primary mt-5">Submit</button>

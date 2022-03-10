@@ -61,7 +61,10 @@ Route::group(['prefix' => 'empresa'], function () {
         Route::get('/edit/{id}/addEstudi', [App\Http\Controllers\HomeController::class, 'addEstudiToOferta'])->name('addEstudiToOferta');
         Route::post('/addEstudi', [App\Http\Controllers\HomeController::class, 'saveEstudiToOferta'])->name('saveEstudiToOferta');
 
+        Route::get('/edit/{id}/removeEstudi/{idEstudi}',[App\Http\Controllers\HomeController::class, 'removeEstudiFromOferta'])->name('removeEstudiFromOferta');
+
         Route::get('/enviar', [App\Http\Controllers\HomeController::class, 'enviarOferta'])->name('enviarOferta');
+
     });
 });
 

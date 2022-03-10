@@ -176,7 +176,21 @@ class HomeController extends Controller
     public function editOferta($id = null){
         $oferta =  Ofertes::findOrFail($id);
         $empreses = Empreses::all();
-        return View::make('oferta.oferta_edit', compact('oferta'),compact('empreses'));
+        $ofertEstudis = DB::table('ofertesestudis as OE')
+            ->select('OE.*','E.nom')
+            ->join('estudis as E','E.IdEstudi','=','OE.IdEstudi')
+            ->where('IdOferta', '=', $id)
+            ->get();
+
+        return View::make('oferta.oferta_edit', compact('oferta'),compact('empreses','ofertEstudis'));
+    }
+
+    public function removeEstudiFromOferta($id = null,$idEstudi=null){
+        $ofertaEstudi = DB::table('ofertesestudis')
+            ->where('IdOferta','=',$id)
+            ->where('idEstudi','=',$idEstudi)
+            ->delete();
+        return $this->editOferta($id);
     }
 
     public function addOferta($id = null){
@@ -243,7 +257,7 @@ class HomeController extends Controller
         $estudi = Estudis::find($request->EstudiId);
 
         $oferta->estudis()->attach($estudi);
-        return redirect()->route('ofertesShow');
+        return $this->editOferta($request->id);
     }
 
     public function loadAddEstudiView(){

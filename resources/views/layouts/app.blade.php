@@ -137,6 +137,10 @@
     const addEstudiToOferta = (id) => {
         window.location.href = `/empresa/oferta/edit/${id}/addEstudi`;
     }
+
+    const removeEstudiFromOferta = (id, idEstudi) => {
+        window.location.href = `/empresa/oferta/edit/${id}/removeEstudi/${idEstudi}`;
+    }
 </script>
 </body>
 </html>

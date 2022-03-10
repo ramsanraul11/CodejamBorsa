@@ -27,7 +27,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputEditMailTitulado">Email address</label>
-                                    <input type="email" name="EmailTitulado" class="form-control" id="InputEditMailTitulado" aria-describedby="emailHelp" placeholder="Email" value="{{$user->email}}">
+                                    <input type="email" name="EmailTitulado" class="form-control" id="InputEditMailTitulado" aria-describedby="emailHelp" placeholder="Email" value="{{$user->email}}" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="InputEditDNITitulado">DNI</label>
