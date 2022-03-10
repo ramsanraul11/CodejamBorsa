@@ -21,25 +21,25 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $u1 = User::create([
-            'name' => 'amina',
-            'surname' => 'amina',
-            'email' => 'amina@sense-son.com',
+            'name' => 'Coordinador',
+            'surname' => 'McCoord',
+            'email' => 'coordinador@sense-son.com',
+            'isCoordinador' => true,
             'dni' => '23455g',
             'telefon' => 73738393,
-            'password' => Hash::make('amina'),
+            'password' => Hash::make('coordinador'),
 
         ]);
-
 
         $u2 = User::create([
-            'name' => 'test2',
-            'surname' => 'test testing',
-            'email' => 'test2@sense-son.com',
+            'name' => 'Titulado',
+            'surname' => 'McTitu',
+            'email' => 'titulado@sense-son.com',
+            'isCoordinador' => false,
             'dni' => '23455g',
             'telefon' => 73738393,
-            'password' => Hash::make('testtesttest'),
+            'password' => Hash::make('titulado'),
         ]);
-
 
         $s1= Estudis::create([
             'nom' => 'Programació'

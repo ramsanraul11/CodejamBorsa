@@ -74,11 +74,13 @@ class FitxaController extends Controller
         //$ue = DB::table('estudisuser')->where('IdUsuari',$user->id)->get();
         return View::make('titulado.titulado_estudis',compact('ue','user'));
     }
-
-    public function borrarTituloFromUser(Request $request){
-
+    public function borrarTituloFromUser($id=null){
+        DB::table('estudisuser')
+            ->where('IdEstudiUser','=',$id)
+            ->delete();
         return $this->userStudies();
     }
+
 
     public function addStudyView(){
         $user = auth()->user();
@@ -121,9 +123,6 @@ class FitxaController extends Controller
         $eu->AnyPromocio=$AnyPromocio;
         $eu -> save();
         return redirect()->route('userStudies');
-    }
-    public function removeUserStudy($id){
-
     }
 
     public function showCVView(){

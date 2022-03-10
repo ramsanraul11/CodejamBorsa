@@ -142,8 +142,8 @@
         window.location.href = `/empresa/oferta/edit/${id}/removeEstudi/${idEstudi}`;
     }
 
-    const borrarTituloFromUser = () => {
-        window.location.href = `/fitxa/estudis/removeStudy`;
+    const borrarTituloFromUser = (id) => {
+        window.location.href = `/fitxa/estudis/removeStudy/${id}`;
     }
 </script>
 </body>
